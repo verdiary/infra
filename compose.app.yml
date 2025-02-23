@@ -16,12 +16,16 @@ services:
     deploy:
       labels:
         - "traefik.enable=true"
+        
+        - "traefik.http.routers.backend.rule=Host(`${ROOT_DOMAIN}`)"
+        - "traefik.http.routers.backend.entrypoints=https"
+        - "traefik.http.routers.backend.tls.certresolver=le"
 
-        - "traefik.http.routers.backend-admin.rule=Host(`admin.${ROOT_DOMAIN}`)"
-        - "traefik.http.routers.backend-admin.middlewares=backend-admin-addprefix"
-        - "traefik.http.routers.backend-admin.entrypoints=https"
-        - "traefik.http.routers.backend-admin.tls.certresolver=le"
-        - "traefik.http.middlewares.backend-admin-addprefix.addprefix.prefix=/admin"
+        # - "traefik.http.routers.backend-admin.rule=Host(`admin.${ROOT_DOMAIN}`)"
+        # - "traefik.http.routers.backend-admin.middlewares=backend-admin-addprefix"
+        # - "traefik.http.routers.backend-admin.entrypoints=https"
+        # - "traefik.http.routers.backend-admin.tls.certresolver=le"
+        # - "traefik.http.middlewares.backend-admin-addprefix.addprefix.prefix=/admin"
         
         # - "traefik.http.routers.bot.rule=Host(`bot.${ROOT_DOMAIN}`)"
         # - "traefik.http.routers.bot.middlewares=bot-addprefix"
@@ -49,13 +53,13 @@ services:
 
 secrets:
   verdiary_secret:
-    name: verdiary_secret
+    name: app-backend_secret
     external: true
   bot_token:
-    name: bot_token
+    name: app-backend_bot_token
     external: true
   database_url:
-    name: database_url
+    name: app-backend_database_url
     external: true
    
 networks:
