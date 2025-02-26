@@ -5,6 +5,7 @@ services:
       - ALLOWED_HOSTS=admin.${ROOT_DOMAIN},${ROOT_DOMAIN}
       - SECRET_KEY_FILE=/run/secrets/verdiary_secret
       - BOT_TOKEN_FILE=/run/secrets/bot_token
+      - BOT_WEBHOOK_TOKEN_FILE=/run/secrets/bot_webhook_token
       - DATABASE_URL_FILE=/run/secrets/database_url
     networks:
       - internal
@@ -12,6 +13,7 @@ services:
     secrets:
       - verdiary_secret
       - bot_token
+      - bot_webhook_token
       - database_url
     deploy:
       labels:
@@ -57,6 +59,9 @@ secrets:
     external: true
   bot_token:
     name: app-backend_bot_token
+    external: true
+  bot_webhook_token:
+    name: app-backend_bot_webhook_token
     external: true
   database_url:
     name: app-backend_database_url
