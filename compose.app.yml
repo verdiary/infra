@@ -18,7 +18,7 @@ services:
     deploy:
       labels:
         - "traefik.enable=true"
-        
+
         - "traefik.http.routers.backend.rule=Host(`${ROOT_DOMAIN}`)"
         - "traefik.http.routers.backend.entrypoints=https"
         - "traefik.http.routers.backend.tls.certresolver=le"
@@ -28,7 +28,7 @@ services:
         # - "traefik.http.routers.backend-admin.entrypoints=https"
         # - "traefik.http.routers.backend-admin.tls.certresolver=le"
         # - "traefik.http.middlewares.backend-admin-addprefix.addprefix.prefix=/admin"
-        
+
         # - "traefik.http.routers.bot.rule=Host(`bot.${ROOT_DOMAIN}`)"
         # - "traefik.http.routers.bot.middlewares=bot-addprefix"
         # - "traefik.http.routers.bot.entrypoints=https"
@@ -43,7 +43,7 @@ services:
       #   limits:
       #     memory: 64M
       restart_policy:
-        condition: on-failure
+        condition: any
         window: 15s
       update_config:
         order: start-first
@@ -66,7 +66,7 @@ secrets:
   database_url:
     name: app-backend_database_url
     external: true
-   
+
 networks:
   internal:
     external: true
